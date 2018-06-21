@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Barchart</title>
+    <link rel="stylesheet" media="screen" href="static/bootstrap.min.css">
+    <link rel="stylesheet" href="static/bootstrap-theme.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!-- refresh every 5 seconds -->
+    <meta http-equiv="refresh" content="30">
+</head>
+<body>
+
+    <table width="100%" class="table">
+    {% for choice in values.choices %}
+        {%  if choice.getHasOpened() %}
+    <tr width="100%" >
+        <td width="150px"> {{ choice.name  }} </td>
+        <td>
+        <table>
+            <tr height="20px">
+                <td bgcolor="#F4FA58" width="{{ choice.maybe * 50 }}px">
+                    {{ choice.maybe if choice.maybe > 0  }} </td>
+                <td bgcolor="#58FA58" width="{{ choice.yes * 50 }}px">
+                    {{ choice.yes if choice.yes > 0 }} </td>
+                <td bgcolor="#F78181" width="{{ choice.no * 50 }}px">
+                    {{ choice.no if choice.no > 0 }} </td>
+            </tr>
+        </table>
+        </td>
+    </tr>
+        {% endif %}
+    {% endfor %}
+    </table>
+
+           {#  <td style="background-size: 80px"
+                bgcolor="#{{ item.color }}"
+                {% if item.common %}background="static/stripes.png"{% endif %} width="{{ item.width }}%">
+                {{ item.name }} ({{ item.count }})
+            </td>#}
+
+
+</body>
+</html>

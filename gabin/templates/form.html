@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Mittagessen</title>
+    <link rel="stylesheet" media="screen" href="static/bootstrap.min.css">
+    <link rel="stylesheet" href="static/bootstrap-theme.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+  function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+  }
+</script>
+</head>
+<body>
+<div class="container">
+    <h1>Wähle dein Gift</h1>
+    <div class="panel panel-default">
+        <div class="panel-heading">Bisher wurden gewählt:</div>
+        <div class="panel-body">
+            <iframe id='dynamic-content' src='barchart' width="100%" frameborder="0" scrolling="no"
+                    height="180" onload="resizeIframe(this)"></iframe>
+        </div>
+    </div>
+
+    {% if values.choiceMade %}
+        <div class="alert alert-success">
+            Deine Stimme(n) wurde(n) gezählt.
+        </div>
+    {% endif %}
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Mittagessenswünsche:</div>
+        <div class="panel-body">
+            <form method="POST" action="/">
+                {{ form.csrf_token }}
+                <table class="table">
+                    <tr>
+                        <td width="50px" bgcolor="#F78181">Nein</td>
+                        <td width="50px" bgcolor="#F4FA58">Ok</td>
+                        <td width="50px" bgcolor="#58FA58">Ja</td>
+                        <td>Ort</td>
+                        <td>Menü</td>
+                    </tr>
+                    {% for id, link in menuEntries %}
+                        <tr>
+                            {% for subfield in form.__getattribute__(id) %}
+                                <td>{{ subfield }}</td>
+                            {% endfor %}
+                            <td>
+                                {% if link != "" %}
+                                    <a href="{{ link }}" target="_blank">{{ form.__getattribute__(id).label }}</a>
+                                {% else %}
+                                    {{ form.__getattribute__(id).label }}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% for menuItem in menu[id] %}
+                                    {{ menuItem }}<br/>
+                                {% endfor %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+                <br/>
+                <input type="submit" value="Abstimmen" class="btn btn-success">
+            </form>
+        </div>
+    </div>
+    {% if history|length > 0 %}
+        <div class="panel panel-default">
+            <div class="panel-heading">Vergangene Abstimmungen:</div>
+            <div class="panel-body">
+                <table width="100%" class="table">
+                    {% for choice in history %}
+                        <tr width="100%">
+                            <td width="400px"> {{ choice[0] }} </td>
+                            <td width="150px"> {{ choice[1] }} </td>
+                            <td>
+                                <table>
+                                    <tr height="20px">
+                                        <td bgcolor="#F4FA58" width="{{ choice[3] * 50 }}px">
+                                            {{ choice[3] if choice[3] > 0 }} </td>
+                                        <td bgcolor="#58FA58" width="{{ choice[4] * 50 }}px">
+                                            {{ choice[4] if choice[4] > 0 }} </td>
+                                        <td bgcolor="#F78181" width="{{ choice[2] * 50 }}px">
+                                            {{ choice[2] if choice[2] > 0 }} </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    {% endif %}
+
+    <center>
+        <small> | v {{ values.version }} | Speiseplan für den {{ values.theDay }} |</small>
+    </center>
+</div>
+</body>
+</html>
