@@ -24,7 +24,7 @@ class GuessingGabin:
     def logFinalResult(self, choices: list, nowDate: str):
         try:
             for item in choices:
-                for menu in item.repeatMenu():
+                for menu in item.getMenu():
                     if len(self.cursor.execute("""SELECT * FROM votes WHERE menu=? AND date=?""",
                                       (menu, nowDate)).fetchall()) > 0:
                         self.cursor.execute(
@@ -50,7 +50,7 @@ class GuessingGabin:
                 result = self.cursor.execute("""SELECT * FROM votes WHERE date!=(?) ORDER BY date(date)""", (dateString,))
                 rows = result.fetchall()
                 for item in choices:
-                    for menu in item.repeatMenu():
+                    for menu in item.getMenu():
                         for row in rows:
                             diff = SequenceMatcher(None, menu, row[0])
                             if diff.ratio() > 0.9:

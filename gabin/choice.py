@@ -17,12 +17,11 @@ class Choice:
     def getAsTuple(self) -> tuple:
         return (self.ident, self.name)
 
-    def getMenu(self, nowDate) -> List[str]:
-        return self.menuParser.getMenu(nowDate)
+    def updateMenu(self, nowDate: str):
+        self.menuParser.updateMenu(nowDate)
 
-    def repeatMenu(self) -> List[str]:
-        # get menu items without triggering the parser
-        return self.menuParser.menu
+    def getMenu(self) -> List[str]:
+        return self.menuParser.getMenu()
 
     def getHasOpened(self) -> bool:
         return self.menuParser.open

@@ -40,7 +40,8 @@ class VoteFormGenerator:
             self.updateVoteCount()
         values = {"votingOpen": True, "version": self.version, "theDay": nowDate, "choiceMade": choiceMade}
         # prepare Webpage
-        menu = {choice.ident: choice.getMenu(nowDate) for choice in self.choices if choice.getHasOpened()}
+        self.updateMenus(nowDate)
+        menu = {choice.ident: choice.getMenu() for choice in self.choices if choice.getHasOpened()}
         menuEntries = [(choice.ident, choice.menuParser.url) for choice in self.choices if choice.getHasOpened()]
         history = guessingG.getHistoricVotes(self.choices)
         return render_template('form.html', form=form, values=values, menu=menu, menuEntries=menuEntries,
@@ -74,3 +75,7 @@ class VoteFormGenerator:
             self.individualVotes = {}
             self.updateVoteCount()
             self.votesDate = nowDate
+
+    def updateMenus(self, nowDate: str):
+        for choice in self.choices:
+            choice.updateMenu(nowDate)

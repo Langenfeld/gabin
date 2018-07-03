@@ -24,24 +24,23 @@ class MenuParser:
         self.lastCheck = "NEVER"
         self.t = 0
 
-    def getMenu(self, nowDate: str) -> list:
-        try:
-            if self.lastUpdate == nowDate:
-                return self.menu
-            else:
+    def getMenu(self) -> list:
+        return self.menu
+
+    def updateMenu(self, nowDate: str):
+        if self.lastUpdate != nowDate:
+            try:
                 menuDataRaw = self._updateMenu()
                 self.menu = MenuParser.getValidMenu(menuDataRaw)
                 if len(self.menu) < len(menuDataRaw):
-                    logging.warning("Menu not parsable: %s"%str(menuDataRaw))
+                    logging.warning("Menu not parsable (%s): %s"%(type(self), str(menuDataRaw)))
                 else:
                     self.lastUpdate = nowDate
-                return self.menu
-        except Exception as e:
-            logging.warning(e)
-            return []
+            except Exception as e:
+                logging.warning(e)
 
 
-    def _updateMenu(self) -> str:
+    def _updateMenu(self) -> List[str]:
         return ["-"]
 
     @staticmethod
@@ -115,10 +114,14 @@ class FoodTruckParser(MenuParser):
             temp = tfResult.find(class_="truck")
             if temp != None:
                 trucks.append(temp.text)
+                trucks.append(temp.text)
                 self.open = True
         return trucks
 
 class NullParser(MenuParser):
 
-    def getMenu(self, nowDate: str) -> list:
+    def getMenu(self) -> list:
         return []
+
+    def updateMenu(self, nowDate: str):
+        pass
