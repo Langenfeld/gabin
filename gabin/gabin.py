@@ -17,7 +17,7 @@ app.config.update(
 )
 Session(app)
 
-VERSION = "0.7.5"
+VERSION = "0.7.6"
 CHOICES = [Choice("mensa", "Mensa",
                   MenuStudentenwerkParser("https://www.swfr.de/essen-trinken/speiseplaene/mensa-flugplatz/")),
            Choice("solar", "SolarCasino", MenuFrauenhoferParser("https://kantine.ise.fraunhofer.de/sic/menu-sic/")),
