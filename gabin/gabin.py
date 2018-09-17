@@ -27,7 +27,7 @@ CHOICES = [Choice("mensa", "Mensa",
            Choice("baecker", "Bäcker", NullParser(""))]
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-GuessingGabin.databasePath = os.path.join(BASE_DIR, "gabinHistory.db")
+GuessingGabin.databasePath = os.path.join(BASE_DIR, "gabinHistory.db.demo")
 
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.WARNING)
