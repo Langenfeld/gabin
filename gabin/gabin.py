@@ -1,5 +1,5 @@
 from flask import Flask
-from flask.ext.session import Session
+from flask_session import Session
 from choice import Choice
 import os
 from guessingGabin import GuessingGabin
@@ -27,7 +27,7 @@ CHOICES = [Choice("mensa", "Mensa",
            Choice("baecker", "Bäcker", NullParser(""))]
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-GuessingGabin.databasePath = os.path.join(BASE_DIR, "gabinHistory.db.demo")
+GuessingGabin.databasePath = os.path.join(BASE_DIR, "gabinHistory.db")
 
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.WARNING)
