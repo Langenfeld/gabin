@@ -6,6 +6,12 @@ from guessingGabin import GuessingGabin
 from menuParser import *
 import logging
 from voteFormGenerator import VoteFormGenerator
+import configparser
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+config = configparser.ConfigParser()
+config.read(os.path.join(BASE_DIR, "config.ini"))
 
 app = Flask(__name__)
 app.secret_key = os.urandom(32)
@@ -26,8 +32,8 @@ CHOICES = [Choice("mensa", "Mensa",
                "http://www.foodtrucks-deutschland.de/trucks/stadt/freiburg-liste-tour-daten-termine-aktuell")),
            Choice("baecker", "Bäcker", NullParser(""))]
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-GuessingGabin.databasePath = os.path.join(BASE_DIR, "gabinHistory.db.demo")
+
+GuessingGabin.databasePath = os.path.join(BASE_DIR, config.get("misc","dbpath"))
 
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.WARNING)
@@ -43,4 +49,4 @@ def getBarChart():
     return voteFormGenerator.getBarChart()
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080, threaded=True)
+    app.run(host='0.0.0.0', port=int(config.get("misc","port")), threaded=True)
