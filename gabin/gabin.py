@@ -3,7 +3,7 @@ from flask_session import Session
 from choice import Choice
 import os
 from guessingGabin import GuessingGabin
-from menuParser import NullParser, MenuFrauenhoferParser, MenuStudentenwerkParser, FoodTruckParser
+from menuParser import *
 import logging
 from voteFormGenerator import VoteFormGenerator
 
@@ -20,7 +20,7 @@ Session(app)
 VERSION = "0.7.6"
 CHOICES = [Choice("mensa", "Mensa",
                   MenuStudentenwerkParser("https://www.swfr.de/essen-trinken/speiseplaene/mensa-flugplatz/")),
-           Choice("solar", "SolarCasino", MenuFrauenhoferParser("https://kantine.ise.fraunhofer.de/sic/menu-sic/")),
+           Choice("solar", "SolarCasino", MenuSolarParser("http://sic-freiburg.de/restaurant-solar-casino/")),
            Choice("ise", "ISE", MenuFrauenhoferParser("https://kantine.ise.fraunhofer.de/heidenhof/menu-heidenhof/")),
            Choice("foodtruck", "Food Truck", FoodTruckParser(
                "http://www.foodtrucks-deutschland.de/trucks/stadt/freiburg-liste-tour-daten-termine-aktuell")),

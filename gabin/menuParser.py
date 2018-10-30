@@ -93,6 +93,30 @@ class MenuStudentenwerkParser(MenuParser):
         d = date.today().strftime("%d.%m.")
         return dayName + " " + d
 
+class MenuSolarParser(MenuParser):
+
+    days=["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"]
+
+    def _updateMenu(self) -> list:
+        request = requests.get(self.url)
+        content = request.text.replace("<br/>", " <br/> ").replace("<br>", ", ")
+        soup = BeautifulSoup(content, "html.parser")
+        #TODO: add date to heading to detect old menu
+        result = soup.find("h2", text="Aktueller Speiseplan")
+        parent = result.parent
+        menuItems = parent.findAll("p")
+        pivoth = self.getTodayPivoth(menuItems)
+        menu = menuItems[pivoth+1 :pivoth + 3]
+        return [item.text for item in menu]
+
+    def getTodayPivoth(self, menuItems):
+        wd = datetime.today().weekday()
+        d = MenuSolarParser.days[wd]
+        for i, item in enumerate(menuItems):
+            if d in item.text:
+                return i
+        raise Exception("No Weekday found in "+self.url)
+
 class FoodTruckParser(MenuParser):
 
     def _updateMenu(self) -> list:
