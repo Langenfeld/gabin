@@ -16,7 +16,7 @@ config.read(os.path.join(BASE_DIR, "config.ini"), encoding='utf-8')
 app = Flask(__name__)
 app.secret_key = os.urandom(32)
 app.config.update(
-    DEBUG = True,
+    #DEBUG = True,
     SESSION_TYPE='filesystem',
     SESSION_PERMANENT=True,
     SESSION_FILE_DIR="./sessions"
@@ -59,4 +59,4 @@ def getBarChart():
     return voteFormGenerator.getBarChart()
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=int(config.get("misc", "port")), threaded=False)
+    app.run(host='0.0.0.0', port=int(config.get("misc", "port")), threaded=True)
