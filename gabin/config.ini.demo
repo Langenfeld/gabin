@@ -1,3 +1,11 @@
 [misc]
 dbpath = gabinHistory.db.demo
 port = 8080
+
+[restaurants]
+mensa = Mensa, MenuStudentenwerkParser, https://www.swfr.de/essen-trinken/speiseplaene/mensa-flugplatz/
+solar = SolarCasino, MenuFrauenhoferParser, https://kantine.ise.fraunhofer.de/sic/menu-sic/
+ise = ISE, MenuFrauenhoferParser, https://kantine.ise.fraunhofer.de/heidenhof/menu-heidenhof/
+foodtrauck = Food Truck, FoodTruckParser,
+               http://www.foodtrucks-deutschland.de/trucks/stadt/freiburg-liste-tour-daten-termine-aktuell
+baecker = Bäcker, NullParser, None
