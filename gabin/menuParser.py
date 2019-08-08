@@ -54,7 +54,6 @@ class MenuParser:
                 return True
         return False
 
-
 class MenuFrauenhoferParser(MenuParser):
 
     def _updateMenu(self) -> list:
@@ -66,7 +65,6 @@ class MenuFrauenhoferParser(MenuParser):
 
     def constructClass(self, no):
         d = date.today().strftime("%d.%m.%Y")
-        d = d.replace(".","_")
         d = d+"-menu"+str(no)
         return d
 
