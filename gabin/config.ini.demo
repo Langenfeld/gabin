@@ -1,8 +1,12 @@
 [misc]
+# Path to the sqlite database storing the choices (are shown in the history box of the page)
 dbpath = gabinHistory.db.demo
+# Port of the Gabin website
 port = 8080
 
 [restaurants]
+# List of canteens to be aggregated
+# <arbitraryname> = <displayname>, <parsertype>, <url>
 mensa = Mensa, MenuStudentenwerkParser, https://www.swfr.de/essen-trinken/speiseplaene/mensa-flugplatz/
 solar = SolarCasino, MenuFrauenhoferParser, https://kantine.ise.fraunhofer.de/sic/menu-sic/
 ise = ISE, MenuFrauenhoferParser, https://kantine.ise.fraunhofer.de/heidenhof/menu-heidenhof/
