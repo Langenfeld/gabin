@@ -1,6 +1,8 @@
 # gabin
 Gabin aggregates menus from different canteens presenting them as a website together with a vote form so that your department can decide where to go beforehand.
 
+![Example screenshot](./example.png)
+
 ## Installation
 
 Install all necessary python (Python > 3.6) modules in the `` requirements.txt`` (usually by running `` pip install -r requirements.txt --user``).
