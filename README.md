@@ -1,6 +1,7 @@
 # gabin
 Gabin aggregates menus from different canteens presenting them as a website together with a vote form so that your department can decide where to go beforehand.
 
+
 ![Example screenshot](./example.png)
 
 ## Installation
