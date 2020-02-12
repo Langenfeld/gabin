@@ -1,5 +1,5 @@
 # gabin
-Gabin aggregates menus from different canteens presenting them as a website together with a vote form so that your department can decide where to go beforehand.
+Gabin<sup id="a1">[1](#f1)</sup> aggregates menus from different canteens presenting them as a website together with a vote form so that your department can decide where to go beforehand.
 
 
 ![Example screenshot](./example.png)
@@ -28,3 +28,7 @@ Each entry is build in the form ``<id> = <displayname>, <parsertype>, <url>`` wh
 * Feel free to add your own by extending the ``MenuParser`` class in ``MenuParsers.py``
 
 Gabin can be run by executing ``gabin.py`` as a standalone web server or as a WSGI application.
+
+
+----
+<b id="f1">1</b> _Gabin_ is a fictional restaurant guide featured in a series of detective stories following the cook Xavier Kieffer (Tom Hillenband, _Teufelsfrucht: Ein kulinarischer Krimi_, KiWi-Taschenbuch)
