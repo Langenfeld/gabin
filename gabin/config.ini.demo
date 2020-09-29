@@ -12,4 +12,4 @@ solar = SolarCasino, MenuFrauenhoferParser, https://kantine.ise.fraunhofer.de/si
 ise = ISE, MenuFrauenhoferParser, https://kantine.ise.fraunhofer.de/heidenhof/menu-heidenhof/
 foodtrauck = Food Truck, FoodTruckParser,
                http://www.foodtrucks-deutschland.de/trucks/stadt/freiburg-liste-tour-daten-termine-aktuell
-baecker = Bäcker, NullParser, None
+baecker = Bäcker, NullParser,
