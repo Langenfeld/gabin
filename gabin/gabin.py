@@ -1,5 +1,4 @@
-from flask import Flask
-from flask_session import Session
+from flask import Flask, sessions
 from choice import Choice
 import os
 from guessingGabin import GuessingGabin
@@ -21,7 +20,7 @@ app.config.update(
     SESSION_PERMANENT=True,
     SESSION_FILE_DIR="./sessions"
 )
-Session(app)
+#Session(app)
 
 VERSION = "0.7.6"
 PARSER = {"MenuStudentenwerkParser": MenuStudentenwerkParser,

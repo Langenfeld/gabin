@@ -5,6 +5,7 @@ from wtforms import Form, validators, RadioField
 from datetime import date
 from choice import Choice
 from guessingGabin import GuessingGabin
+import os
 
 
 class VoteFormGenerator:
@@ -17,6 +18,8 @@ class VoteFormGenerator:
 
 
     def getVoteForm(self):
+        if "sid" not in session:
+            session["sid"] = os.urandom(32)
         # values
         nowDate = date.today().strftime("%d.%m.%Y")
         self.resetVotes(nowDate)
@@ -30,11 +33,12 @@ class VoteFormGenerator:
         # save choice
         choiceMade = False
         if request.method == 'POST' and form.validate():
+            session.modified = True
             choices = {choice.ident: getattr(form, choice.ident).data for choice in self.choices}
             session["choice"] = choices
             session["date"] = nowDate
             choiceMade = True
-            self.individualVotes[session.sid] = choices
+            self.individualVotes[session["sid"]] = choices
             guessingG.logFinalResult(self.choices, nowDate)
             guessingG.commit()
             self.updateVoteCount()
